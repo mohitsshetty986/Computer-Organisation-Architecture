@@ -1,0 +1,125 @@
+#include<stdio.h>
+#include<conio.h>
+void dtb(int q, int z[])
+{
+	int i=0,temp;
+	while(q!=0)
+	{
+    		z[i]=q%2;
+    		q=q/2;
+    		i++;
+	}
+	for(i=0;i<2;i++)
+	{
+		temp=z[i];
+		z[i]=z[3-i];
+		z[3-i]=temp;
+	}
+}
+
+void add(int a[], int z[])
+{  int carr=0,i,e;
+	for(i=3;i>=0;i--)
+	{	e=a[i]+z[i]+carr;
+		if(e==3)
+			{a[i]=1;carr=1;}
+		if(e==2)
+			{a[i]=0;carr=1;}
+		if(e==1)
+			{a[i]=1;carr=0;}
+	}
+}
+
+void left(int a[],int z[])
+{
+a[0]=a[1];
+a[1]=a[2];
+a[2]=a[3];
+a[3]=z[0];
+z[0]=z[1];
+z[1]=z[2];
+z[2]=z[3];
+}
+
+int main()
+{
+int x,y,a[4],b[4],c[4],d[4],count,i,j;
+clrscr();
+printf("Enter two decimal no");
+scanf("%d %d",&y,&x);
+
+for(i=0;i<4;i++)
+{       a[i]=0;
+	c[i]=0;
+	b[i]=0;
+	d[i]=0;
+}
+
+dtb(x,c);
+dtb(y,b);
+
+//Displaying binary equivalent of decimal
+printf("Binary of %d is:",x);
+for(i=0;i<4;i++)
+	printf("%d ",c[i]);
+printf("\n");
+printf("Binary of %d is:",y);
+for(i=0;i<4;i++)
+	printf("%d ",b[i]);
+
+//Converting into 2's compliment
+i=3;
+while(c[i]==0)
+	i--;
+
+d[i]=1;
+i--;
+while(i>=0)
+{
+	if(c[i]==1)
+	d[i]=0;
+	else
+	d[i]=1;
+	i--;
+}
+//Displaying 2's Compliment
+printf("\n");
+for(i=0;i<4;i++)
+printf("%d ",d[i]);
+
+
+printf("\n");
+count=4;
+while(count>0)
+{       //Algo
+	left(a,b);
+	add(a,d);
+	if(a[0]==1)
+	{
+		b[3]=0;
+		add(a,c);
+	}
+	else
+		b[3]=1;
+	count--;
+
+	//Displaying intermediate results
+	for(i=0;i<4;i++)
+		printf("%d ",a[i]);
+	for(i=0;i<4;i++)
+		printf("%d ",b[i]);
+	printf("\n");
+}
+
+//Displaying Results
+ printf("Remainder:");
+for(i=0;i<4;i++)
+	printf("%d ",a[i]);
+
+printf("\nQuotient:");
+for(i=0;i<4;i++)
+	printf("%d ",b[i]);
+
+getch();
+return 0;
+}

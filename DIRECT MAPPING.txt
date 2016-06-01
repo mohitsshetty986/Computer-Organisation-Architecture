@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+int main() {
+	int a[20],d[5],e[5],i,j=0,n,x;
+	for(i=0;i<20;i++)
+     a[i]=rand()%130;
+     i=0;
+    while(i<20)
+    {
+     n=0;
+     printf("partition %d\n",j+1);//display the possible partitions
+     while(n<5)
+     {
+       printf("%d \n",a[i]);i++;
+	n++;
+     }
+     j++;
+    }
+    for(j=0;j<5;j++)
+    {
+      for(i=0;i<5;i++)
+       e[i]=a[5*i+j]; //candidates for storing in cache
+       x=rand()%4;    //randomly chosen from 0-4
+      d[j]=e[x];  // candidate at random x stored in cache d at index j
+    }
+	printf("direct cache\n");
+	for(i=0;i<=4;i++)
+	printf("%d ",d[i]);
+	getch();
+	return 0;
+}

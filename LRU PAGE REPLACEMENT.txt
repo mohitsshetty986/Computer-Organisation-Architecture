@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<conio.h>
+int main()
+{
+int check[3],stack[3],input[20],i,j,p=3,n,min,temp,hit=0;
+clrscr();
+printf("Enter the no of pages");
+scanf("%d",&n);
+for(i=0;i<n;i++)
+	scanf("%d",&input[i]);
+stack[0]=-1;
+stack[1]=-1;
+stack[2]=-1;
+check[0]=0;
+check[1]=1;
+check[2]=2;
+for(i=0;i<n;i++)
+{
+	for(j=0;j<3;j++)
+	{
+		if(stack[j]==input[i])
+			break;
+	}
+	if(j!=3)
+	{
+		check[j]=p;
+		p++;
+	      for(j=0;j<3;j++)
+			printf("%d ",stack[j]);
+	printf("%d",hit);
+	printf("\n");
+	}
+else{
+	 min=99;
+	for(j=0;j<3;j++)
+	{
+		if(min>check[j])
+		{	min=check[j];
+		temp=j;
+		}
+
+	}
+stack[temp]=input[i];
+check[temp]=p;
+p++;
+if(i>2)
+hit++;
+for(j=0;j<3;j++)
+	printf("%d ",stack[j]);
+printf("%d",hit);
+printf("\n");
+}
+}
+getch();
+return 0;
+}

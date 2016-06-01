@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+int main() {
+	int a[20],d[5][2],e[5],i,j=0,n,x,y;
+
+
+	for(i=0;i<20;i++)
+     a[i]=rand()%130;
+     i=0;
+    while(i<20)
+    {
+     n=0;
+     printf("partition %d\n",j+1);
+     while(n<5)
+     {
+       printf("%d \n",a[i]);i++;
+	n++;
+     }
+     j++;
+    }
+    for(j=0;j<5;j++)
+    {
+      for(i=0;i<4;i++)
+       e[i]=a[5*i+j];
+       x=rand()%4;
+      d[j][0]=e[x];
+      y=x;
+      while(y==x)
+      x=rand()%4;
+      d[j][1]=e[x];      // randomly select from all numbers of blocks
+    }
+	printf("set associative cache\n");
+	for(i=0;i<=4;i++)
+	printf("%d %d\n",d[i][0],d[i][1]);
+	getch();
+	return 0;
+}
